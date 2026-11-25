@@ -1,20 +1,25 @@
 import json
 tasks=[]
-def addtask(): #function to add tasks into the to-do list
-    while True: 
-        title=input("Enter task: ").strip()
-        if not task['title'].strip(): #to prevent empty spaces as input from user
-            raise ValueError("Task title cannot be empty")
-        else:
-            break 
-        
-    if len(tasks)==0: #for defining unique id's
-        task_id=1
-    else:
-        task_id=max(task["id"] for task in tasks)+1
-    
+def addtask():  #function to add tasks into the to-do list
+    while True:
+        try:
+            title = input("Enter task: ").strip()
 
-    d={'id':task_id,'title':title,'completed':False}
+            if not title:
+                raise ValueError("Task title cannot be empty")
+
+            break
+
+        except ValueError as e:
+            print(e)
+
+    if len(tasks) == 0:
+        task_id = 1
+    else:
+        task_id = max(task["id"] for task in tasks) + 1
+
+    d = {'id': task_id, 'title': title, 'completed': False}
+
     tasks.append(d)
     savetasks()
     print('Task added successfully')
